@@ -69,7 +69,7 @@ else {
           </label>
           <label className="methods"  >
 
-          <select id="select" name="select" onClick={getMethod}>
+          <select data-testid="select" id="select" name="select" onClick={getMethod}>
             <option value="get"  >GET</option>
             <option value="post" >POST</option>
             <option value="put" >PUT</option>
