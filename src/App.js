@@ -12,19 +12,21 @@ import axios from 'axios';
 
 function App (){
 
-  const [data,setData] = useState(null)
+  const [data,setData] = useState()
   const [requestParams,setrequestParams] = useState({})
 
  const callApi = (data,formInputs) => {
     
     setrequestParams(formInputs)
-    setData(data)
     }
 
-    useEffect(()=>{
-      console.log('the data changed')
-    },[[data]])
-  
+    useEffect(async () => {
+      console.log('welcome to Effect')
+        const newRequest = await fetch(requestParams.url);
+        const newResponse = await newRequest.json();
+        setData(newResponse);
+      
+    }, [requestParams]);
     
   
     return (
