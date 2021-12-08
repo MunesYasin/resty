@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState,useEffect}from 'react';
 
 import './app.scss';
 
@@ -8,46 +8,37 @@ import Header from './components/header';
 import Footer from './components/footer';
 import Form from './components/form';
 import Results from './components/results';
+import axios from 'axios';
 
-class App extends React.Component {
+function App (){
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      requestParams: {},
-    };
-  }
+  const [data,setData] = useState(null)
+  const [requestParams,setrequestParams] = useState({})
 
-  callApi = (data,formInputs) => {
-    // mock output
-    // const data = {
-    //   count: 2,
-    //   results: [
-    //     {name: 'fake thing 1', url: 'http://fakethings.com/1'},
-    //     {name: 'fake thing 2', url: 'http://fakethings.com/2'},
-    //   ],
-    // };
-
-    this.setState({
-      data:data,
-      requestParams:formInputs
-    })
+ const callApi = (data,formInputs) => {
     
-  }
+    setrequestParams(formInputs)
+    setData(data)
+    }
 
-  render() {
+    useEffect(()=>{
+      console.log('the data changed')
+    },[[data]])
+  
+    
+  
     return (
       <React.Fragment>
         <Header />
-        <div data-testid="request">Request Method: {this.state.requestParams.method}</div>
-        <div>URL: {this.state.requestParams.url}</div>
-        <Form handleApiCall={this.callApi} />
-        <Results data={this.state.data} />
+        
+        <div data-testid="request">Request Method: {requestParams.method}</div>
+        <div>URL: {requestParams.url}</div>
+        <Form handleApiCall={callApi} />
+        <Results data={data} />
         <Footer />
       </React.Fragment>
     );
-  }
+  
 }
 
 export default App;
