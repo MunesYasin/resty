@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './app.js';
-
+import App from './App'
 class Main extends React.Component {
   render() {
     return <App />;
